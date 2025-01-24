@@ -1,0 +1,13 @@
+﻿ from your powershell:
+ scp -rp c:/publish/JobsService/* root@172.31.14.9:/srv/JobsService
+
+ sta:
+ scp -rp c:/publish/JobsService/* root@172.31.5.250:/srv/JobsService
+
+from server (FK-API):
+systemctl restart 011Global.JobsService
+systemctl restart 011Global.JobsService
+
+
+read console/systemd output:
+journalctl --unit=011Global.JobsService.service -n 100

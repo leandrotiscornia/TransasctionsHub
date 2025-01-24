@@ -1,0 +1,19 @@
+﻿[Unit]
+Description=011Global's Job Service
+
+[Service]
+Type=notify
+WorkingDirectory=/srv/JobsService
+ExecStart=/usr/bin/dotnet /srv/JobsService/011Global.JobsService.dll
+SyslogIdentifier=011Global.JobsService
+User=root
+
+Restart=always             
+RestartSec=5
+
+# This environment variable is necessary when dotnet isn't loaded for the specified user.
+# To figure out this value, run 'env | grep DOTNET_ROOT' when dotnet has been loaded into your shell.
+Environment=DOTNET_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
