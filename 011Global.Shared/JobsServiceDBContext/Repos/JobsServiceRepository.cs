@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _011Global.Shared.JobsServiceDBContext.Entities;
 
 namespace _011Global.Shared.JobsServiceDBContext.Repos;
 
@@ -16,8 +17,46 @@ public class JobsServiceRepository : IJobsServiceRepository
         _context = context;
     }
 
+    public async Task<List<GlobalCustomer>> GetCustomers()
+    {
+        try
+        {
+            return await _context.GlobalCustomers.ToListAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw e;
+        }
+    }
+
     public async Task<Dictionary<string, GlobalJob>> GetJobs(string hostName)
     {
-        return await _context.GlobalJobs.Where(g => g.MachineNameList.Contains(hostName)).ToDictionaryAsync(gk => gk.TypeName, gv => gv);
+        try
+        {
+            return await _context.GlobalJobs
+            .Where(g => g.MachineNameList
+            .Contains(hostName))
+            .ToDictionaryAsync(gk => gk.TypeName, gv => gv);
+        }
+        catch (Exception e)
+        {
+
+            throw e;
+        }
+        
+    }
+
+    public async Task SaveTransactionDetails(GlobalTransaction transaction)
+    {
+        try
+        {
+            await _context.GlobalTransaction.AddAsync(transaction);
+        }
+        catch (Exception e)
+        {
+            
+            throw e;
+        }
     }
 }

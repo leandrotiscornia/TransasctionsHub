@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using _011Global.Shared.JobsServiceDBContext.Entities;
+using _011Global.Shared.JobsServiceDBContext.Configurations;
+
 
 namespace _011Global.Shared.JobsServiceDBContext;
 
@@ -13,31 +15,20 @@ public partial class JobsServiceContext : DbContext
     }
 
     public virtual DbSet<GlobalJob> GlobalJobs { get; set; }
-
+    public virtual DbSet<GlobalCustomer> GlobalCustomers { get; set; }
+    public virtual DbSet<GlobalCreditCard> GlobalCreditCards { get; set; }
+    public virtual DbSet<GlobalAddress> GlobalAddresses { get; set; }
+    public virtual DbSet<GlobalTransaction> GlobalTransaction { get; set; }
+    public virtual DbSet<GlobalTransactionsStatus> GlobalTransactionStatuses { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<GlobalJob>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Global_J__3214EC27AF7B5666");
+        modelBuilder.ApplyConfiguration(new GlobalJobConfiguration());
+        modelBuilder.ApplyConfiguration(new GlobalCustomerConfiguration());
+        modelBuilder.ApplyConfiguration(new GlobalCreditCardConfiguration());
+        modelBuilder.ApplyConfiguration(new GlobalAddressConfiguration());
+        modelBuilder.ApplyConfiguration(new GlobalTransactionConfiguration());
+        modelBuilder.ApplyConfiguration(new GlobalTransactionStatusConfiguration());
 
-            entity.ToTable("Global_Jobs");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Assembly)
-                .HasMaxLength(250)
-                .IsUnicode(false);
-            entity.Property(e => e.LastStartDate).HasColumnType("datetime");
-            entity.Property(e => e.LastStopDate).HasColumnType("datetime");
-            entity.Property(e => e.MachineNameList)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(250)
-                .IsUnicode(false);
-            entity.Property(e => e.TypeName)
-                .HasMaxLength(250)
-                .IsUnicode(false);
-        });
 
         OnModelCreatingPartial(modelBuilder);
     }
