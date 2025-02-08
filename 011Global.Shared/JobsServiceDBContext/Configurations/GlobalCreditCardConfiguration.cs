@@ -15,6 +15,7 @@ namespace _011Global.Shared.JobsServiceDBContext.Configurations
         {
             entity.HasKey(e => e.CreditCardID);
             entity.ToTable("Global_CreditCards");
+           
 
             entity.Property(e => e.CreditCardID);
             entity.Property(e => e.CustomerID);
@@ -27,15 +28,13 @@ namespace _011Global.Shared.JobsServiceDBContext.Configurations
             entity.Property(e => e.CardHolder)
                     .HasMaxLength(350)
                     .IsUnicode(false);
-            entity.Property(e => e.SecurityCode)
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
             entity.Property(e => e.ExpirationMonth)
                     .HasMaxLength(5)
                     .IsUnicode(false);
             entity.Property(e => e.ExpirationYear)
                     .HasMaxLength(8)
                     .IsUnicode(false);
+            entity.Property(e => e.Encrypted);
             entity.Property(e => e.CreationDate).HasColumnType("datetime");
         }
     }

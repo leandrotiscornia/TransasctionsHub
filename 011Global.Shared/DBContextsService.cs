@@ -18,7 +18,7 @@ namespace _011Global.Shared
             _services.AddDbContext<JobsServiceContext>(options => options.UseSqlServer(connectionString,
             sqlServerOptions => sqlServerOptions.CommandTimeout(120).EnableRetryOnFailure()));
 
-            _services.AddTransient<IJobsServiceRepository, JobsServiceRepository>();
+            _services.AddScoped<IJobsServiceRepository, JobsServiceRepository>();
 
             return _services; 
         }

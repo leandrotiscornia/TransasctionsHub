@@ -20,6 +20,7 @@ public partial class JobsServiceContext : DbContext
     public virtual DbSet<GlobalAddress> GlobalAddresses { get; set; }
     public virtual DbSet<GlobalTransaction> GlobalTransaction { get; set; }
     public virtual DbSet<GlobalTransactionsStatus> GlobalTransactionStatuses { get; set; }
+    public virtual DbSet<GlobalPackage> GlobalPackages { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new GlobalJobConfiguration());
@@ -28,7 +29,7 @@ public partial class JobsServiceContext : DbContext
         modelBuilder.ApplyConfiguration(new GlobalAddressConfiguration());
         modelBuilder.ApplyConfiguration(new GlobalTransactionConfiguration());
         modelBuilder.ApplyConfiguration(new GlobalTransactionStatusConfiguration());
-
+        modelBuilder.ApplyConfiguration(new GlobalPackageConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }
