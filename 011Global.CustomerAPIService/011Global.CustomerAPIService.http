@@ -1,0 +1,6 @@
+@_011Global.CustomerAPIService_HostAddress = http://localhost:5023
+
+GET {{_011Global.CustomerAPIService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
